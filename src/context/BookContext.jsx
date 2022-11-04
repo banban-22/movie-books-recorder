@@ -4,15 +4,13 @@ import {
   SET_LOADING,
   SET_BOOKS,
   REMOVE_BOOKS,
-  SET_MOVIES,
-  REMOVE_MOVIES,
   HANDLE_SEARCH,
   HANDLE_PAGE,
 } from '../components/reducer/actions';
 
 const API_ENDPOINT =
   'https://app.rakuten.co.jp/services/api/BooksForeignBook/Search/20170404?format=json';
-const API_ID = `${process.env.REACT_APP_BOOKS_API_KEY}`;
+const API_ID = process.env.REACT_APP_BOOKS_API_KEY;
 // https://app.rakuten.co.jp/services/api/BooksForeignBook/Search/20170404?format=json&title=potter&booksGenreId=005407&applicationID=1057440284976572380
 // https://app.rakuten.co.jp/services/api/BooksForeignBook/Search/20170404?format=json&title=Potter&booksGenreId=005407&applicationId=1057440284976572380
 // https://app.rakuten.co.jp/services/api/BooksForeignBook/Search/20170404?format=json&title=potter&booksGenreId=005407&applicationID=1057440284976572380
@@ -56,7 +54,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchBooks(
-      `${API_ENDPOINT}&title=${state.title}&booksGenreId=005407&applicationID=1057440284976572380`
+      `${API_ENDPOINT}&title=${state.title}&booksGenreId=005407&applicationID=${API_ID}`
     );
   }, [state.title]);
 
@@ -73,5 +71,34 @@ export const useGlobalContext = () => {
   return useContext(AppContext);
 };
 
-export { AppContext, AppProvider };
- */
+export { AppContext, AppProvider }; */
+
+import React, { useState, useContext } from 'react';
+import useFetch from '../components/Movie/useFetch';
+
+export const API_ENDPOINT =
+  'https://app.rakuten.co.jp/services/api/BooksForeignBook/Search/20170404?format=json';
+export const API_ID = process.env.REACT_APP_BOOKS_API_KEY;
+
+const BookContext = React.createContext();
+
+const BookProvider = ({ children }) => {
+  const [query, setQuery] = useState('potter');
+  const {
+    isLoading,
+    error,
+    data: books,
+  } = useFetch(`&title=${query}&booksGenreId=005407&applicationID=${API_ID}`);
+
+  return (
+    <BookContext.Provider value={{ isLoading, error, books, query, setQuery }}>
+      {children}
+    </BookContext.Provider>
+  );
+};
+
+export const useGlobalBookContext = () => {
+  return useContext(BookContext);
+};
+
+export { BookContext, BookProvider };

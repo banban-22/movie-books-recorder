@@ -5,7 +5,7 @@ import Movie from './Movie/Movie';
 const Home = () => {
   return (
     <main>
-      {/* <Book /> */}
+      <Book />
       <Movie />
     </main>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import useFetch from '../components/useFetch';
+import useFetch from '../components/Movie/useFetch';
 // import reducer from '../components/reducer/reducer';
 // import {
 //   SET_LOADING,
