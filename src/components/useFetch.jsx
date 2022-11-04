@@ -12,7 +12,6 @@ const useFetch = (urlParams) => {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
 
       if (data.Response === 'True') {
         setData(data.Search || data);
@@ -28,7 +27,11 @@ const useFetch = (urlParams) => {
   };
 
   useEffect(() => {
-    fetchMovie(`${API_ENDPOINT}${urlParams}`);
+    const timer = setTimeout(() => {
+      fetchMovie(`${API_ENDPOINT}${urlParams}`);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [urlParams]);
 
   return { isLoading, error, data };
