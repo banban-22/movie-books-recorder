@@ -18,7 +18,7 @@ const Movie = () => {
     <section className="w-full">
       <DarkMode />
       <SearchMovie />
-      <div className="m-8 grid grid-cols-6 gap-6">
+      <div className="m-8 grid grid-cols-2 gap-2">
         {movies.map((item) => {
           const { imdbID: id, Poster: poster, Title: title, Year: year } = item;
           return (
