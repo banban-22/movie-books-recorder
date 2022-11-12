@@ -1,12 +1,10 @@
 import React, { useState, useContext } from 'react';
-import useFetch from '../components/useFetch';
+import useFetch from '../useFetch';
 // import reducer from '../components/reducer/reducer';
 // import {
 //   SET_LOADING,
 //   SET_MOVIES,
 //   REMOVE_MOVIES,
-//   HANDLE_SEARCH,
-//   HANDLE_PAGE,
 // } from '../components/reducer/actions';
 
 export const API_ENDPOINT = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_API_KEY}`;
